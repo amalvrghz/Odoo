@@ -1,0 +1,40 @@
+<odoo>
+<record id="estate_property_tree" model="ir.ui.view">
+        <field name="name">estate</field>
+        <field name="model">estate.model</field>
+        <field name="arch" type="xml">
+            <tree string="Property list">
+                <field name="name"/>
+                <field name="postcode"/>
+                <field name="bedrooms"/>
+                <field name="living_area"/>
+                <field name="expected_price"/>
+                <field name="selling_price"/>
+                <field name="date_availability"/>
+            </tree>
+        </field>
+</record>
+     <record id="estate_view_search" model="ir.ui.view">
+            <field name="name">estate search</field>
+            <field name="model">estate.model</field>
+            <field name="arch" type="xml">
+                <search string="Estate property">
+                    <field name="name"/>
+                    <field name="postcode"/>
+                    <field name="expected_price"/>
+                    <field name="bedrooms"/>
+                    <field name="living_area"/>
+                    <field name="facades"/>
+                    <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                    <separator/>
+                    <filter string="New" name="status" domain="[('status', '=','new')]"/>
+                    <filter string="Available" name="status" domain="[('status', '=','new'), ('status','=','offer_received')]"/>
+                    <filter string="Offer received" name="status" domain="[('status', '=','offer_received')]"/>
+                    <group>
+                        <filter name ="postcode" context="{'group_by':'postcode'}"/>
+                        <filter name ="status" context="{'group_by':'status'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+</odoo>

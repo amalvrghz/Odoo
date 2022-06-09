@@ -1,0 +1,8 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_estate_model,access_estate_model,model_estate_model,group_manager,1,1,1,1
+access_estate_model2,access_estate_model2,model_estate_model,group_agent_user,1,1,0,0
+access_property_type,access_property_type,model_property_type,group_manager,1,1,1,1
+access_property_tag,access_property_tag,model_property_tag,group_manager,1,1,1,1
+access_property_offer,access_property_offer,model_property_offer,group_manager,1,1,1,1
+
+

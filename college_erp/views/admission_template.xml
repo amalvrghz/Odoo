@@ -1,0 +1,28 @@
+<odoo>
+    <data>
+        <record id="email_template" model="mail.template">
+            <field name="name">Admission Details</field>
+            <field name="model_id" ref="college_erp.model_college_admission"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="email_from">{{object.mail}}</field>
+            <field name="email_to" >{{object.mail}}</field>
+            <field name="subject">Admission for {{object.first_name}}</field>
+            <field name="body_html">
+                <![CDATA[
+               <p>
+               Dear
+               <t t-out="object.first_name"/>,
+               <br/>
+               Your Admission has Done successfully.Your joining date is
+               <t t-out="object.date_of_apply"/>
+               And your Admission Number is
+               <t t-out="object.admission_num"/>
+               <br/>
+               <br/>
+               Thanks and Regards
+               </p>
+               ]]>
+         </field>
+        </record>
+    </data>
+</odoo>

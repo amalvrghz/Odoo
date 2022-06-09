@@ -1,0 +1,204 @@
+<odoo>
+
+
+    <!--          Actions of College ERP            -->
+
+
+    <record id="student_action" model="ir.actions.act_window">
+        <field name="name">Student</field>
+        <field name="res_model">college.student</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="admission_action" model="ir.actions.act_window">
+        <field name="name">Admission</field>
+        <field name="res_model">college.admission</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="course_action" model="ir.actions.act_window">
+        <field name="name">Course</field>
+        <field name="res_model">college.course</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="semester_action" model="ir.actions.act_window">
+        <field name="name">Semester</field>
+        <field name="res_model">college.semester</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="ac_year_action" model="ir.actions.act_window">
+        <field name="name">Academic Year</field>
+        <field name="res_model">academic.year</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="cls_action" model="ir.actions.act_window">
+        <field name="name">Classes</field>
+        <field name="res_model">college.classes</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="exam_type_action" model="ir.actions.act_window">
+        <field name="name">Exam Types</field>
+        <field name="res_model">exam.types</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="college_exam_action" model="ir.actions.act_window">
+        <field name="name">Exams</field>
+        <field name="res_model">college.exam</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="mark_sheet_action" model="ir.actions.act_window">
+        <field name="name">Marksheets</field>
+        <field name="res_model">student.mark.sheet</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="promotion_action" model="ir.actions.act_window">
+        <field name="name">Promotion</field>
+        <field name="res_model">promotion.class</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_student_mark_sheet" model="ir.actions.report">
+        <field name="name">Student MarkSheet</field>
+        <field name="model">mark.sheet.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">college_erp.report_student_mark_sheet</field>
+        <field name="report_file">college_erp.report_student_mark_sheet</field>
+        <field name="print_report_name">Student Wise Marklist</field>
+    </record>
+
+    <record id="action_class_wise_mark_sheet" model="ir.actions.report">
+        <field name="name">Class Wise Marksheet</field>
+        <field name="model">mark.sheet.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">college_erp.report_class_wise_mark_sheet</field>
+        <field name="report_file">college_erp.report_class_wise_mark_sheet</field>
+        <field name="print_report_name">Class Wise Marklist</field>
+    </record>
+<!--    <record id="action_xlsx_student_wise_mark_sheet" model="ir.actions.report">-->
+<!--        <field name="name">Student Wise Marksheet</field>-->
+<!--        <field name="model">mark.sheet.wizard</field>-->
+<!--        <field name="report_type">xlsx</field>-->
+<!--        <field name="report_name">college_erp.report_xlsx_student_wise_mark_sheet</field>-->
+<!--        <field name="report_file">college_erp.report_xlsx_student_wise_mark_sheet</field>-->
+<!--        <field name="print_report_name">Student Wise Marksheet</field>-->
+<!--    </record>-->
+
+     <record id="action_mark_sheet_wizardd" model="ir.actions.act_window">
+        <field name="name">Marksheet</field>
+        <field name="target">new</field>
+        <field name="res_model">mark.sheet.wizard</field>
+        <field name="view_mode">form</field>
+    </record>
+
+<!--    ____________________________________________  -->
+
+
+<!--       Views  of College Student        -->
+
+    <record id="student_tree" model="ir.ui.view">
+        <field name="name">Students</field>
+        <field name="model">college.student</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="admission_no"/>
+                <field name="first_name"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="admission_date"/>
+            </tree>
+        </field>
+    </record>
+    <record id="student_form" model="ir.ui.view">
+        <field name="name">Students</field>
+        <field name="model">college.student</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="pending,done"/>
+                    <button name="button_create" string="Create Student" states="pending" class="oe_highlight" type="object"/>
+                </header>
+                <sheet>
+                    <group>
+                    <group>
+                        <field name="first_name"/>
+                    </group>
+                    <group>
+                        <field name="last_name"/>
+                    </group>
+                    </group>
+                    <notebook>
+                        <page string="Personal Details">
+                           <group>
+                            <group>
+                                <field name="father"/>
+                                <field name="mother"/>
+                            </group>
+                             <group>
+                                <field name="phone"/>
+                                <field name="email"/>
+                             </group>
+                            <group>
+                                <field name="communication_address"/>
+                                <field name="permanent_address" attrs="{'invisible': [('same_as','=',True)]}"/>
+                                <field name="same_as"/>
+                            </group>
+                           </group>
+                        </page>
+                        <page string="Educational Details">
+                            <group>
+                                <group>
+                                    <field name="class_id"/>
+                                    <field name="course_id"/>
+                                    <field name="semesters_id"/>
+                                    <field name="academic_yr_id"/>
+                                </group>
+                                <group>
+                                    <field name="admission_no" readonly="1"/>
+                                    <field name="admission_date"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--         All  Menus        -->
+    <menuitem id="college_menu_root" name="College ERP">
+        <menuitem id="student_menu" name="Students" sequence="1" action="student_action"/>
+        <menuitem id="configuration_menu" name="Configuration" sequence="6">
+            <menuitem id="academic_year_menu" name="Academic Year" action="ac_year_action"/>
+            <menuitem id="exam_types_menu" name="Exam Types" action="exam_type_action"/>
+            <menuitem id="semester_menu" name="Semesters" action="semester_action"/>
+            <menuitem id="course_menu" name="Course" action="course_action"/>
+            <menuitem id="mark_sheet_menu" name="Marksheets" action="mark_sheet_action"/>
+        </menuitem>
+        <menuitem id="admission_menu" name="Admission" sequence="2" action="admission_action"/>
+        <menuitem id="exam_menu" name="Exams" sequence="4">
+            <menuitem id="exam_menu_child" name="Exams" action="college_exam_action"/>
+            <menuitem id="promotion_menu" name="Promotion" action="promotion_action"/>
+        </menuitem>
+        <menuitem id="cls_menu" name="Class" sequence="3" action="cls_action"/>
+        <menuitem id="mark_reports_menu" name="Reports" groups="base.group_user" sequence="5">
+            <menuitem id="marksheet_reports_menu" name="Marksheet" action="action_mark_sheet_wizardd"/>
+        </menuitem>
+    </menuitem>
+
+<!--    <menuitem id="college_menu_root" name="College ERP"/>-->
+<!--    <menuitem id="student_menu" name="Students" sequence="1" parent="college_menu_root" action="student_action"/>-->
+<!--    <menuitem id="configuration_menu" name="Configuration" sequence="6" parent="college_menu_root"/>-->
+<!--    <menuitem id="course_menu" name="Course" parent="configuration_menu" action="course_action"/>-->
+<!--    <menuitem id="admission_menu" name="Admission" sequence="2" parent="college_menu_root" action="admission_action"/>-->
+<!--    <menuitem id="semester_menu" name="Semester" parent="configuration_menu" action="semester_action"/>-->
+<!--    <menuitem id="cls_menu" name="Class" parent="college_menu_root" sequence="3" action="cls_action"/>-->
+<!--    <menuitem id="academic_year_menu" name="Academic Year" parent="configuration_menu" action="ac_year_action"/>-->
+<!--    <menuitem id="exam_types_menu" name="Exam Types" parent="configuration_menu" action="exam_type_action"/>-->
+<!--    <menuitem id="exam_menu" name="Exams" parent="college_menu_root" sequence="4"/>-->
+<!--    <menuitem id="exam_menu_child" name="Exams" parent="exam_menu" action="college_exam_action"/>-->
+<!--    <menuitem id="promotion_menu" name="Promotion" parent="exam_menu" action="promotion_action"/>-->
+<!--    <menuitem id="mark_sheet_menu" name="Marksheets" parent="configuration_menu" action="mark_sheet_action"/>-->
+<!--    <menuitem id="mark_reports_menu" name="Reports" parent="college_menu_root" groups="base.group_user"/>-->
+    </odoo>

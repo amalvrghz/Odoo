@@ -1,0 +1,38 @@
+<odoo>
+
+    <record id="semester_tree" model="ir.ui.view">
+        <field name="name">Semester</field>
+        <field name="model">college.semester</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="num_of_sem"/>
+                <field name="course2_id"/>
+            </tree>
+        </field>
+    </record>
+    <record id="semester_form" model="ir.ui.view">
+        <field name="name">Semester</field>
+        <field name="model">college.semester</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div>
+                        <h1>
+                            <field name="name" attrs="{'invisible': [('course2_id','=',False)]}" readonly="1" force_save="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                    <field name="num_of_sem"/>
+                    <field name="course2_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Syllabus">
+                            <field name="syllabus_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,28 @@
+<odoo>
+    <record id="marksheet_wizard_form" model="ir.ui.view">
+        <field name="name">mark.sheet.wizard</field>
+        <field name="model">mark.sheet.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                    <group>
+                        <field name="report_type" widget="radio" style="width:250px;"/>
+                        <field name="student_id" attrs="{'invisible':[('report_type', '!=', 'student_wise')]}" style="width:250px;"/>
+                        <field name="class_id" attrs="{'invisible':[('report_type', '!=', 'class_wise')]}" style="width:250px;"/>
+                    </group>
+                    <group>
+                        <field name="semester_id" style="width:250px;"/>
+                        <field name="exam_type" style="width:250px;"/>
+                    </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="button_print_report" type="object" string="Print PDF" class="btn-primary"/>
+                    <button name="button_print_xlsx" type="object" string="Print XLSX" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

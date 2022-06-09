@@ -1,0 +1,40 @@
+{
+    'name': "College ERP",
+    'depends': ['base', 'mail'],
+    'application': True,
+    'version': '15.0.1.0.0',
+    'sequence': 1,
+    'summary': 'college management',
+    'description': "College ERP",
+    'license': '',
+    'website': '',
+    'data': [
+        'security/ir.model.access.csv',
+        'views/courses.xml',
+        'views/students.xml',
+        'views/admissions.xml',
+        'views/semester.xml',
+        'views/academic_year.xml',
+        'views/admission_template.xml',
+        'views/reject_template.xml',
+        'views/syllabus.xml',
+        'data/admission_sequence.xml',
+        'views/class_views.xml',
+        'views/exam_types.xml',
+        'views/exams.xml',
+        'data/date_scheduler.xml',
+        'views/mark_sheets.xml',
+        'views/marksheet_marks.xml',
+        'views/class_promotion.xml',
+        'views/marksheet_wizard.xml',
+        'report/report_template.xml',
+        'report/classwise_report_template.xml',
+        # 'views/action_manager.xml'
+            ],
+    'assets': {
+        'web.assets_backend': [
+            'college_erp/static/src/js/action_manager.js',
+        ],
+    },
+
+}

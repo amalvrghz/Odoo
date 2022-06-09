@@ -1,0 +1,71 @@
+<odoo>
+
+<!--       Material Request Actions      -->
+
+    <record id="material_request_action" model="ir.actions.act_window">
+        <field name="name">Material Requests</field>
+        <field name="res_model">material.request</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="material_request_line_action" model="ir.actions.act_window">
+        <field name="name">Material Requests</field>
+        <field name="res_model">material.request.lines</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!--       Material Request Menus       -->
+
+    <menuitem id="material_parent_menu" name="Material Request"/>
+    <menuitem id="material_sub_menu" name="Material Request" action="material_request_action" parent="material_parent_menu"/>
+
+<!--      Material Request Views-->
+
+    <record id="material_request_tree" model="ir.ui.view">
+        <field name="name">Material Requests</field>
+        <field name="model">material.request</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence"/>
+                <field name="employee_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <record id="material_request_form" model="ir.ui.view">
+        <field name="name">Material Requests</field>
+        <field name="model">material.request</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,rejected"/>
+                    <button string="Request" name="button_request" class="oe_highlight" states="draft" type="object"/>
+                    <button string="Confirm" name="button_confirm" class="oe_highlight" states="to_approve" type="object" groups="material_request.group_dept_manager,material_request.group_dept_head"/>
+                    <button string="Approve" name="button_approve" class="oe_highlight" states="first_approval" type="object" groups="material_request.group_dept_head"/>
+                    <button string="Reject" name="button_reject" class="oe_highlight" states="first_approval" type="object" groups="material_request.group_dept_head"/>
+                </header>
+                <sheet>
+                    <div>
+                        <h1>
+                            <field name="sequence" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="employee_id" style="width:300px;" readonly="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Requests">
+                            <field name="request_line_ids">
+                                <tree editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="request_type"/>
+                                    <field name="from_location" attrs="{'invisible':[('request_type','!=','internal_transfer')]}"/>
+                                    <field name="to_location" attrs="{'invisible':[('request_type','!=','internal_transfer')]}"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
+

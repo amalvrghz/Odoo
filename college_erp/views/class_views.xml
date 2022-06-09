@@ -1,0 +1,46 @@
+<odoo>
+    <record id="class_tree" model="ir.ui.view">
+        <field name="name">Class</field>
+        <field name="model">college.classes</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="semester_id"/>
+                <field name="course_id"/>
+                <field name="academic_year_id"/>
+            </tree>
+        </field>
+    </record>
+    <record id="class_form" model="ir.ui.view">
+        <field name="name">Class</field>
+        <field name="model">college.classes</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div>
+                        <h1>
+                                <field name="name" attrs="{'invisible': [('academic_year_id','=',False)]}"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="semester_id"/>
+                            <field name="course_id"/>
+                            <field name="academic_year_id"/>
+                        </group>
+                        <group>
+                            <field name="promotion_class_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Students">
+                            <field name="student_ids">
+                               
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

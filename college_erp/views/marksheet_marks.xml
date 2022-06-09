@@ -1,0 +1,15 @@
+<odoo>
+    <record id="mark_record_tree" model="ir.ui.view">
+        <field name="name">Marks</field>
+        <field name="model">mark.sheet.marks</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="subject"/>
+                <field name="marks"/>
+                <field name="pass_marks"/>
+                <field name="max_marks"/>
+                <field name="pass_fail" widget="toggle_button"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

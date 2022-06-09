@@ -1,0 +1,42 @@
+<odoo>
+<template id="report_student_mark_sheet">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="rec">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2 style="margin-left:300px;"><span t-field="rec.student_name_id.first_name"/> : Marklist</h2>
+                    <h3 style="margin-left:350px;"><span t-field="rec.courses_id.name"/> : <span t-field="rec.classes_id.academic_year_id.name"/></h3><br/>
+                    <h6>Exam : <span t-field="rec.exam_id.type"/></h6>
+                    <h6 t-if="rec.pass_fails">Result : Pass</h6>
+                    <h6 t-else="">Result : Fail</h6>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Mark</th>
+                                <th>Passmark</th>
+                                <th>Pass/Fail</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="rec.marks_ids" t-as="line">
+                                    <tr>
+                                        <td><span t-esc="line.subject"/></td>
+                                        <td><span t-esc="line.marks"/></td>
+                                        <td><span t-esc="line.pass_marks"/></td>
+                                        <t t-if="line.pass_fail">
+                                            <td>Pass</td>
+                                        </t>
+                                        <t t-else="">
+                                            <td>Fail</td>
+                                        </t>
+                                    </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+</odoo>

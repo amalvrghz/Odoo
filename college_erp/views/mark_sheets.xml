@@ -1,0 +1,48 @@
+<odoo>
+    <record id="mark_sheet_tree" model="ir.ui.view">
+        <field name="name">Mark Sheets</field>
+        <field name="model">student.mark.sheet</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="student_name_id"/>
+                <field name="exam_id"/>
+                <field name="classes_id"/>
+                <field name="courses_id"/>
+            </tree>
+        </field>
+    </record>
+    <record id="mark_sheet_form" model="ir.ui.view">
+        <field name="name">Mark sheets</field>
+        <field name="model">student.mark.sheet</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="student_name_id"/>
+                            <field name="exam_id"/>
+                            <field name="rank"/>
+                            <field name="pass_fails" widget="toggle_button"/>
+                        </group>
+                        <group>
+                            <field name="classes_id"/>
+                            <field name="courses_id"/>
+                            <field name="semesters_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Marks">
+                            <field name="marks_ids"/>
+                        </page>
+                    </notebook>
+                    <div style="margin-left:800px;">
+                        <h4>
+                            <label for="total" string="Total"/>
+                            <field name="total"/>
+                        </h4>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

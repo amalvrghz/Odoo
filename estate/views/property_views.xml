@@ -1,0 +1,170 @@
+<odoo>
+<record id="estate_model_action" model="ir.actions.act_window">
+    <field name="name">Estate</field>
+    <field name="res_model">estate.model</field>
+    <field name="view_mode">tree,form</field>
+</record>
+<record id="property_type_action" model="ir.actions.act_window">
+    <field name="name">Property types</field>
+    <field name="res_model">property.type</field>
+    <field name="view_mode">tree,form</field>
+</record>
+    <record id="res_partner_action_customer" model="ir.actions.act_window">
+    <field name="name">Buyers</field>
+    <field name="res_model">res.partner</field>
+    <field name="view_mode">kanban,form</field>
+    </record>
+    <record id="action_res_userss" model="ir.actions.act_window">
+    <field name="name">Sellers</field>
+    <field name="res_model">res.users</field>
+    <field name="view_mode">kanban,form</field>
+    </record>
+    <record id="property_tag_action" model="ir.actions.act_window">
+    <field name="name">Property Tags</field>
+    <field name="res_model">property.tag</field>
+    <field name="view_mode">tree,form</field>
+    </record>
+<!--    <record id="property_offer_action" model="ir.actions.act_window">-->
+<!--    <field name="name">Property Offers</field>-->
+<!--    <field name="res_model">property.offer</field>-->
+<!--    <field name="view_mode">tree,form</field>-->
+<!--    </record>-->
+    <record id="property_offer_tree" model="ir.ui.view">
+        <field name="name">Property Offers</field>
+        <field name="model">property.offer</field>
+        <field name="arch" type="xml">
+            <tree>
+<!--                <field name="pro_name"/>-->
+                <field name="partner_id"/>
+                <field name="property_type_id"/>
+                <field name="offer_amount"/>
+            </tree>
+
+        </field>
+    </record>
+    <record id="property_offer_id" model="ir.ui.view">
+        <field name="name">Property Offers</field>
+        <field name="model">property.offer</field>
+        <field name="arch" type="xml">
+        <form>
+            <sheet>
+                <group>
+                    <field name="partner_id"/>
+                    <field name="offer_amount"/>
+                    <field name="validity"/>
+                    <field name="deadline"/>
+                    <field name="status"/>
+
+                </group>
+            </sheet>
+        </form>
+        </field>
+    </record>
+    <record id="property_tag_id" model="ir.ui.view">
+        <field name="name">Property Tags</field>
+        <field name="model">property.tag</field>
+        <field name="arch" type="xml">
+        <form>
+            <sheet>
+                <group>
+                    <field name="property_tags"/>
+                </group>
+            </sheet>
+        </form>
+        </field>
+    </record>
+ <record model="ir.ui.view" id="property_type_id">
+        <field name="name">Property types</field>
+        <field name="model">property.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="property_types"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+ </record>
+<record id="property_view_form" model="ir.ui.view">
+<field name="name">estate  model</field>
+<field name="model">estate.model</field>
+<field name="arch" type="xml">
+    <form name="name">
+        <header>
+            <button name="button_send" string="Send offer" states="offer_received" class="oe_highlight" type="object"/>
+            <button name="button_accept" string="Accept" type="object"/>
+            <button name="button_refuse" string="Refuse" type="object"/>
+            <field name="status" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold,cancelled"/>
+        </header>
+        <sheet>
+        <div id="pro_name">
+        <h1><field name="name"/></h1>
+        </div>
+        <field name="property_tags_id" widget="many2many_tags"/>
+        <group>
+            <group>
+                <field name="property_types_id"/>
+                <field name="postcode"/>
+            </group>
+            <group>
+                <field name="date_availability"/>
+                <field name="expected_price"/>
+                <field name="best_offer" readonly="True"/>
+                <field name="selling_price"/>
+            </group>
+            <notebook style="width:100%;">
+                <page string="Description">
+                    <group colspan="2">
+                    <field name="description"/>
+                    <field name="bedrooms"/>
+                    <field name="living_area"/>
+                    <field name="facades"/>
+                    <field name="garage"/>
+<!--                    <field name="status"/>-->
+                    <field name="garden"/>
+                    <field name="garden_area"/>
+                    <field name="garden_orientation"/>
+                </group>
+                </page>
+                <page string="Offers">
+                    <group colspan="2">
+                          <field name="offers_ids">
+                                <tree>
+<!--                                    <field name="pro_name"/>-->
+                                    <field name="partner_id"/>
+<!--                                    <field name="property_type_id"/>-->
+                                    <field name="offer_amount"/>
+                                    <field name="validity"/>
+                                    <field name="deadline"/>
+<!--                                    <field name="status"/>-->
+                                </tree>
+                          </field>
+                    </group>
+
+                </page>
+                <page string="Other Info">
+                    <group colspan="2">
+                        <field name="user_id"/>
+                        <field name="buyer_id"/>
+                    </group>
+                </page>
+            </notebook>
+    </group>
+    </sheet>
+</form>
+</field>
+</record>
+<menuitem id="estate_menu_root" name="Real estate"/>
+    <menuitem id="estate_first_level_menu" parent="estate_menu_root" name="Properties"/>
+        <menuitem id="estate_model_menu_action" parent="estate_first_level_menu" action="estate_model_action"/>
+<!--    <menuitem id="user_menu_id" name="user" sequence="0" />-->
+<!--        <menuitem name="User Details" id="user_agent_menu_id" parent="user_menu_id" action=" action_agent_details" sequence="1"/>-->
+    <menuitem id="settings_first_level_menu" parent="estate_menu_root" name="Setttings"/>
+    <menuitem id="partners_menu" parent="settings_first_level_menu" action="res_partner_action_customer"/>
+    <menuitem id="users_menu" parent="settings_first_level_menu" action="action_res_userss"/>
+    <menuitem id="property_type_menu_action" parent="settings_first_level_menu" action="property_type_action"/>
+    <menuitem id="property_tag_menu_action" parent="settings_first_level_menu" action="property_tag_action"/>
+<!--    <menuitem id="property_offer_menu_action" parent="settings_first_level_menu" action="property_offer_action"/>-->
+
+</odoo>

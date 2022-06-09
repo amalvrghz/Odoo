@@ -1,0 +1,49 @@
+<odoo>
+    <record id="promotion_form" model="ir.ui.view">
+        <field name="name">Promotion</field>
+        <field name="model">promotion.class</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="button_generate_promotion" class="oe_highlight" type="object" string="Generate Promotion" attrs="{'invisible': ['|',('btn_hide', '=', 1),('state', '=', 'completed')]}"/>
+                    <button name="button_promote" class="oe_highlight" type="object" string="Promote" states="pending"/>
+                    <field name="state" widget="statusbar" statusbar_visible="pending,completed"/>
+<!--                     attrs="{'invisible': [('btn_hide', '=', 0)]}"-->
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="exam_id" style="width:300px;"/>
+                            <field name="college_class_id" style="width:300px;"/>
+                        </group>
+                        <group>
+                            <field name="semester_id"/>
+                            <field name="academic_yr_id"/>
+                            <field name="btn_hide" attrs="{'invisible':1}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Promoted Students">
+                            <field name="promoted_students_ids">
+<!--                                <tree editable="bottom">-->
+<!--                                    <field name="first_name"/>-->
+<!--                                </tree>-->
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="promotion_tree" model="ir.ui.view">
+        <field name="name">Promotion</field>
+        <field name="model">promotion.class</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="exam_id"/>
+                <field name="semester_id"/>
+                <field name="college_class_id"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

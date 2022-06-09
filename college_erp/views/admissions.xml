@@ -1,0 +1,82 @@
+<odoo>
+    <record id="admission_tree" model="ir.ui.view">
+        <field name="name">Admission</field>
+        <field name="model">college.admission</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="first_name"/>
+                <field name="course_id"/>
+                <field name="phone"/>
+                <field name="mail"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <record id="admission_form" model="ir.ui.view">
+        <field name="name">Admission</field>
+        <field name="model">college.admission</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Confirm" class="oe_highlight" states="draft" name="button_confirm" type="object"/>
+                    <button string="Reject" name="button_reject" states="application" type="object"/>
+                    <button string="Mark as Done" name="button_done" states="application" class="oe_highlight" type="object"/>
+                    <button string="Reset to Draft" name="reset_button" states="application,approved,done,rejected" type="object"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,application,approved,done,rejected"/>
+                </header>
+                <sheet>
+                    <div>
+                        <h1>
+                            <field name="admission_num" attrs="{'invisible': [('state','!=','done')]}" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                    <group>
+                        <field name="first_name"/>
+                        <field name="course_id" options="{'no_create':True,'no_create_edit':True}"/>
+                    </group>
+                        <group>
+                            <field name="last_name"/>
+                            <field name="admission_date" attrs="{'invisible': [('state','!=','done')]}"/>
+                            <field name="semester_id" attrs="{'invisible': [('state','!=','done')]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Personal Details">
+                            <group>
+                            <group>
+                            <field name="father"/>
+                            <field name="mother"/>
+                            <field name="phone"/>
+                            <field name="mail"/>
+                            </group>
+                            <group>
+                                <field name="communication_address"/>
+                                <field name="permanent_address" attrs="{'invisible': [('same_as','=',True)]}"/>
+                                <field name="same_as"/>
+                            </group>
+                            </group>
+                        </page>
+                        <page string="Educational Details">
+                            <group>
+                            <group>
+                                <field name="date_of_apply"/>
+                                <field name="academic_year_id"/>
+                                <field name="prev_qualification"/>
+
+                            </group>
+                                <group>
+                                    <field name="edu_institute"/>
+                                    <field name="document" filename="doc_tc" widget="binary"/>
+                                    <field name="doc_tc" invisible="1"/>
+        <!--                        <field name="tc" widget="pdf_viewer"/>-->
+        <!--                            <field name="state"/>-->
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

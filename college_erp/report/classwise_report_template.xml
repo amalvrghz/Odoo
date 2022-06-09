@@ -1,0 +1,70 @@
+<odoo>
+    <template id="report_class_wise_mark_sheet">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="ob">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2 style="margin-left:250px;"><span t-esc="ob[0]"/> : Marklist</h2>
+                    <h3 style="margin-left:350px;"><span t-esc="ob[1]"/> : <span t-esc="ob[2]"/></h3><br/>
+                    <h6>Exam : <span t-esc="ob[3]"/></h6>
+                    <t t-set="tot" t-value="0"/>
+                    <t t-set="pass" t-value="0"/>
+                    <t t-set="fail" t-value="0"/>
+                        <t t-foreach="data" t-as="obj">
+                            <t t-if="ob[4]==obj.classes_id.id">
+                                <t t-set="tot" t-value="tot+1"/>
+                                <t t-if="obj.pass_fails">
+                                   <t t-set="pass" t-value="pass+1"/>
+                                </t>
+                                <t t-else="">
+                                    <t t-set="fail" t-value="fail+1"/>
+                                </t>
+                            </t>
+                        </t>
+                    <h6>Total : <span t-esc="tot"/></h6>
+                    <h6>Pass : <span t-esc="pass"/></h6>
+                    <h6>Fail : <span t-esc="fail"/></h6>
+                    <h6>Ratio : <span t-esc="pass"/> : <span t-esc="fail"/></h6>
+                    <table class="table table-bordered">
+                        <t t-set="i" t-value="0"/>
+                        <t t-foreach="data" t-as="obj">
+                            <t t-if="i==0">
+                                <thead>
+                                    <tr t-if="ob[4]==obj.classes_id.id">
+                                        <th>Student Name</th>
+                                        <t t-foreach="obj.marks_ids" t-as="o">
+                                                <th><span t-esc="o.subject"/></th>
+                                                <t t-set="i" t-value="1"/>
+                                        </t>
+                                        <th>Obtained Mark</th>
+                                        <th>Total Mark</th>
+                                        <th>Pass/Failed</th>
+                                    </tr>
+                                </thead>
+                            </t>
+                        </t>
+                        <tbody>
+                            <t t-foreach="data" t-as="obj">
+                                <tr t-if="ob[4]==obj.classes_id.id">
+                                    <t t-set="total" t-value="0"/>
+                                    <td><span t-esc="obj.student_name_id.first_name"/></td>
+                                    <t t-foreach="obj.marks_ids" t-as="o">
+                                    <td><span t-esc="o.marks"/></td>
+                                    </t>
+                                    <td><span t-esc="obj.total"/></td>
+                                    <t t-foreach="obj.marks_ids" t-as="o">
+                                        <t t-set="total" t-value="total+o.max_marks"/>
+                                    </t>
+                                    <td><span t-esc="total"/></td>
+                                        <td t-if="obj.pass_fails">Pass</td>
+                                        <td t-else="">Fail</td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </t>
+    </template>
+</odoo>

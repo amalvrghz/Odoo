@@ -1,0 +1,66 @@
+<odoo>
+    <record id="exam_tree" model="ir.ui.view">
+        <field name="name">College Exam</field>
+        <field name="model">college.exam</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="class_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <record id="exam_form" model="ir.ui.view">
+        <field name="name">College Exam</field>
+        <field name="model">college.exam</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="button_generate_marksheet" class="oe_highlight" type="object" string="Generate Marksheet" states="confirmed"/>
+<!--                    <button name="show_students" class="oe_highlight" type="object" string="Show Students" states="confirmed"/>-->
+                    <button name="button_confirmed" class="oe_highlight" type="object" string="Confirm" states="draft"/>
+                    <button name="button_completed" class="oe_highlight" type="object" string="Mark As Done" states="confirmed"/>
+                    <button name="button_reset" type="object" string="Reset to Draft" states="confirmed,completed"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,completed"/>
+
+                </header>
+                <sheet>
+                    <div name="button_box" class="oe_button_box" position="inside">
+                        <button class="oe_stat_button" type="object" name="valuation" attrs="{'invisible':[('student_count','=',0)]}" icon="fa-male">
+                            <field string="Valuation" name="student_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <h1>
+                        <field name="name" attrs="{'invisible': [('semester_id','=',False)]}"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="type_id"/>
+                            <field name="class_id" options="{'no_create':True,'no_create_edit':True}"/>
+                        </group>
+                        <group>
+                            <field name="course_id"/>
+                            <field name="semester_id"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Papers">
+                               <field name="papers_ids">
+                                    <tree editable="bottom">
+                                        <field name="subject"/>
+                                        <field name="pass_mark"/>
+                                        <field name="max_mark"/>
+                                    </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

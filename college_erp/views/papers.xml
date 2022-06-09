@@ -1,0 +1,13 @@
+<!--<odoo>-->
+<!--    <record id="papers_tree" model="ir.ui.view">-->
+<!--        <field name="name">Papers</field>-->
+<!--        <field name="model">exam.papers</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree editable="bottom">-->
+<!--                <field name="subject"/>-->
+<!--                <field name="pass_mark"/>-->
+<!--                <field name="max_mark"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+<!--</odoo>-->

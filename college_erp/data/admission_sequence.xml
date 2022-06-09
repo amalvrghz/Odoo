@@ -1,0 +1,22 @@
+<odoo>
+<data noupdate="1">
+   <record id="sequence_admission" model="ir.sequence">
+      <field name="name">Admission Number</field>
+      <field name="code">college.admission</field>
+      <field name="active">TRUE</field>
+      <field name="prefix">AD</field>
+      <field name="padding">6</field>
+      <field name="number_next_actual">1</field>
+      <field name="number_increment">1</field>
+   </record>
+   <record id="sequence_student" model="ir.sequence">
+      <field name="name">Admission Number</field>
+      <field name="code">college.student</field>
+      <field name="active">TRUE</field>
+      <field name="prefix">AD</field>
+      <field name="padding">6</field>
+      <field name="number_next_actual">1</field>
+      <field name="number_increment">1</field>
+   </record>
+</data>
+</odoo>

@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <record id="email_template2" model="mail.template">
+            <field name="name">Admission Rejected</field>
+            <field name="model_id" ref="college_erp.model_college_admission"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="email_from">{{object.mail}}</field>
+            <field name="email_to" >{{object.mail}}</field>
+            <field name="subject">Admission Rejected</field>
+            <field name="body_html">
+                <![CDATA[
+               <p>
+               Dear
+               <t t-out="object.first_name"/>,
+               <br/>
+               Your Admission has been Rejected.Because,you are unfit for this course
+               <br/>
+               <br/>
+               Thanks and Regards
+               </p>
+               ]]>
+         </field>
+        </record>
+    </data>
+</odoo>
